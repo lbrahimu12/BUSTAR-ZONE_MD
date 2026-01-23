@@ -13,3 +13,9 @@
     <img src="https://readme-typing-svg.herokuapp.com?font=Black+Ops+One&size=45&pause=1000&color=1BAFBA&center=true&vCenter=true&width=800&height=100&lines=BUSTARZONE-MD+WHATSAPP+BOT" alt="Typing SVG" />
   </a>
 </p>
+
+___________
+
+### 🌀 **Generate Authentication**
+
+<a href="https://rahmani-4.onrender.com/pair" target="_blank"><img alt='PAIRING' src='https://img.shields.io/badge/GET%20CREDS.JSON-magenta?style=for-the-badge&logo=opencv&logoColor=white'/></a>
