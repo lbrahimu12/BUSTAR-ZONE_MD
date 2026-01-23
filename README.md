@@ -67,3 +67,15 @@ ___________
   - <a href="https://railway.com"><img src="https://img.shields.io/badge/DEPLOY RAILWAY NOW-h?color=red&style=for-the-badge&logo=msi" width="220" height="38.45"/></a></p>
 
   ____________
+
+
+
+  ####  sᴜᴘᴘᴏʀᴛ & ʀᴇᴘᴏʀᴛɪɴɢ ɪssᴜᴇs ⚒️ 🤠
+
+Found an error or need help? [Contact the maintainer directly on WhatsApp.](https://wa.me/255760164530?text=Hi%2C%20I%20want%20to%20report%20an%20issue%20with%20RAHMANI-XMD)
+
+Or open an issue on the [GitHub Issues page](https://github.com/lbrahimu12/BUSTAR-ZONE_MD/issues).
+
+_______________
+
+
