@@ -1,4 +1,4 @@
 
 
 
-web: node bmbtech.js && node bmbtech.js
+web: node busta.js && node busta.js
