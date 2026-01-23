@@ -1,1 +1,8 @@
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Rockstar-ExtraBold&size=85&pause=100000000&color=black&lines=true&vCenter=true&width=815&height=100&lines=BUSTARZONE MD)](https://git.io/typing-svg) 
+<p align="center">                                                  ʙᴜsᴛᴀʀᴢᴏɴᴇ ᴍᴅ 
+  
+
+</p>
+<p align="center"> 
+  <a href="https://whatsapp.com/channel/0029Vb7HhcI2ZjCj6clT5D1x">
+    <img alt=Support height="390" src="https://files.catbox.moe/9nlsf2.jpg"> 
+    </p>
