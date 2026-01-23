@@ -42,4 +42,4 @@ ____________
 
 #### ᴅᴇᴘʟᴏʏ ᴏɴ ʀᴇɴᴅᴇʀ 🏏
 
-- <a align="center"><a href="https://render.com"> <img src="https://img.shields.io/badge/DEPLOY%20RENDER-blue?style=for-the-badge&logo=render" width="220" height="38.45"/></a></p>
+- <a align="center"><a href="https://render.com"> <img src="https://img.shields.io/badge/DEPLOY%20RENDER-green?style=for-the-badge&logo=render" width="220" height="38.45"/></a></p>
