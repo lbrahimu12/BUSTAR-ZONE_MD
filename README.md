@@ -43,3 +43,11 @@ ____________
 #### ᴅᴇᴘʟᴏʏ ᴏɴ ʀᴇɴᴅᴇʀ 🏏
 
 - <a align="center"><a href="https://render.com"> <img src="https://img.shields.io/badge/DEPLOY%20RENDER-green?style=for-the-badge&logo=render" width="220" height="38.45"/></a></p>
+
+___________
+
+#### ᴅᴇᴘʟᴏʏ ᴏɴ ʀᴀɪʟʏᴡᴀʏ 🚄
+
+  - <a href="https://railway.com"><img src="https://img.shields.io/badge/DEPLOY RAILWAY NOW-h?color=red&style=for-the-badge&logo=msi" width="220" height="38.45"/></a></p>
+
+  ____________
