@@ -30,7 +30,7 @@ zokou({ nomCom: "menu", categorie: "Menu" }, async (dest, zk, commandeOptions) =
     const date = moment().format('DD/MM/YYYY');
 
     let infoMsg = `
-╭━━✧ 👻 ʙᴜsᴛᴀʀᴢᴏɴᴇ ᴍᴅ ʙᴏᴛ ✧━━❖
+╭━━✧ʙᴜsᴛᴀʀᴢᴏɴᴇ ᴍᴅ✧━━❖
 ┊✺┌────••••────⊷
 ┃✇│◎ ᴏᴡɴᴇʀ : ${s.OWNER_NAME}
 ┃✇│◎ ᴘʀᴇғɪx : [ ${s.PREFIXE} ]
@@ -41,8 +41,8 @@ zokou({ nomCom: "menu", categorie: "Menu" }, async (dest, zk, commandeOptions) =
 ┃✇│◎ ᴄʀᴇᴀᴛᴏʀ : ʙᴜsᴛᴀʀᴢᴏɴᴇ ᴍᴅ 
 ┃✇│◎ ᴄᴏᴍᴍᴀɴᴅs : ${cm.length}
 ┃✇│◎ ᴛʜᴇᴍᴇs : ʀᴀʜᴍᴀɴɪ ᴍᴅ
-┊  └────••••────⊷
-╰━━━••✧ʙᴜsᴛᴀʀᴢᴏɴᴇ ᴍᴅ ʙᴏᴛ✧••━━━◆ \n`;
+┊ └────••••────⊷
+╰━━━••✧ʙᴜsᴛᴀʀᴢᴏɴᴇ ᴍᴅ✧••━━━◆ \n`;
 
     let menuMsg = `ʙᴜsᴛᴀʀᴢᴏɴᴇ ᴍᴅ ʙᴏᴛ`;
     
