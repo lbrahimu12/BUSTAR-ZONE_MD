@@ -24,7 +24,7 @@ zokou({ nomCom: "menu", categorie: "General" }, async (dest, zk, commandeOptions
     const temps = moment().format('HH:mm:ss');
     const date = moment().format('DD/MM/YYYY');
 
-    let infoMsg = `┏━━━🔰 *ʙᴜsᴛᴀᴢᴏɴᴇ ᴍᴅ ʙᴏᴛ * 🔰━━━┓
+    let infoMsg = `┏━━━🔰*ʙᴜsᴛᴀᴢᴏɴᴇ ᴍᴅ ʙᴏᴛ*🔰━━━┓
 ┃ 🔰 ʜɪ , *${nomAuteurMessage}*! 🔰
 ┣━━━━━━━━━━━━━━━━━━━━━
 ┃ 💥 *sʏsᴛᴇᴍ ɪɴғᴏ:*
