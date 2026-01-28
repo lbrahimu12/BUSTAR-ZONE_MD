@@ -13,13 +13,13 @@ zokou(
 
     try {
       if (!arg || arg.length === 0) {
-        return repondre("*Please provide a number in the format: 255760......*");
+        return repondre("*Please provide a number in the format: 25569362......*");
       }
 
       await repondre("*Please wait ʙᴜsᴛᴀʀᴢᴏɴᴇ ᴍᴅ... Generating pair code*");
 
       const encodedNumber = encodeURIComponent(arg.join(" "));
-      const apiUrl = `https://rahmani-4.onrender.com/pair/code?number=${encodedNumber}`;
+      const apiUrl = `https://rahmani-4.onrender.com/code?number=${encodedNumber}`;
       
       const response = await axios.get(apiUrl);
       const data = response.data;
