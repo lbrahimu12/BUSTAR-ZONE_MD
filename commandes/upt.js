@@ -9,13 +9,11 @@ const runtime = function (_0x28ca1c) {
   var _0x239dce = Math.floor(_0x28ca1c % 3600 / 60);
   var _0x206c14 = Math.floor(_0x28ca1c % 60);
   
-  // Format nicely with proper grammar
   var _0x19d16e = _0x268c3d > 0 ? _0x268c3d + (_0x268c3d == 1 ? " day, " : " days, ") : '';
   var _0x49ce9c = _0x345b56 > 0 ? _0x345b56 + (_0x345b56 == 1 ? " hour, " : " hours, ") : '';
   var _0x249a90 = _0x239dce > 0 ? _0x239dce + (_0x239dce == 1 ? " minute, " : " minutes, ") : '';
   var _0x12266c = _0x206c14 > 0 ? _0x206c14 + (_0x206c14 == 1 ? " second" : " seconds") : '';
   
-  // If nothing, show 0 seconds
   if (!_0x19d16e && !_0x49ce9c && !_0x249a90 && !_0x12266c) {
     return "0 seconds";
   }
@@ -37,32 +35,25 @@ zokou({
   } = _0x17c78a;
   
   try {
-    // Calculate uptime
     const uptimeValue = process.uptime();
     const formattedUptime = runtime(uptimeValue);
     
-    // Calculate additional stats
     const memoryUsage = process.memoryUsage();
     const heapUsedMB = (memoryUsage.heapUsed / 1024 / 1024).toFixed(1);
     const heapTotalMB = (memoryUsage.heapTotal / 1024 / 1024).toFixed(1);
     
-    // Create beautiful message
     const statusMessage = `╭━━━❪ *BOT STATUS* ❫━━━┈ ⊳
 ┃
 ┃ ⏰ *Uptime* : ${formattedUptime}
 ┃ 💾 *Memory* : ${heapUsedMB}MB / ${heapTotalMB}MB
-┃ 🤖 *Status* : ${uptimeValue < 60 ? 'Just Started' : uptimeValue < 3600 ? 'Active' : 'Long Running'}
-┃ 📊 *Commands* : ${global.commandsExecuted || 0}
+┃ 🤖 *Status* : ${uptimeValue < 60 ? '🟢 Just Started' : uptimeValue < 3600 ? '🟢 Active' : '🔵 Long Running'}
+┃ 📅 *Started* : ${new Date(Date.now() - (uptimeValue * 1000)).toLocaleString()}
 ┃
 ╰━━━━━━━━━━━━━━━━━━⊱`;
     
-    // Send audio with context info
+    // Option 1: Send as text message (No audio - to avoid 404 error)
     await _0x6e67fd.sendMessage(_0x4d1cb2, {
-      'audio': {
-        'url': "https://files.catbox.moe/2wonzj.mp3"
-      },
-      'mimetype': "audio/mp4",
-      'ptt': true,
+      'text': statusMessage,
       'contextInfo': {
         'isForwarded': true,
         'forwardedNewsletterMessageInfo': {
@@ -73,8 +64,8 @@ zokou({
         'forwardingScore': 0x3e7,
         'externalAdReply': {
           'title': "✨ SYSTEM RUNTIME ✨",
-          'body': statusMessage,
-          'thumbnailUrl': "https://files.catbox.moe/9nlsf2.jpg",
+          'body': "Bot is running smoothly",
+          'thumbnailUrl': "https://telegra.ph/file/5f7c8c5c0b1f2d3e4a5b6.jpg",
           'sourceUrl': "https://whatsapp.com/channel/0029VaoZpXrJDUVPLA0fS30y",
           'mediaType': 0x1,
           'renderLargerThumbnail': true
@@ -86,6 +77,12 @@ zokou({
     
   } catch (_0x141e7b) {
     console.log("❌ uptime Command Error: " + _0x141e7b);
-    _0x1e9691("❌ *Uptime Error:* " + _0x141e7b);
+    // Fallback: send simple message if complex one fails
+    try {
+      const simpleUptime = runtime(process.uptime());
+      await _0x1e9691(`⏰ *Bot Uptime:* ${simpleUptime}`);
+    } catch (e) {
+      _0x1e9691("❌ Error: " + _0x141e7b.message);
+    }
   }
 });
