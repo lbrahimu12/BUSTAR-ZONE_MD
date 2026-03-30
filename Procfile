@@ -1,4 +1,2 @@
 
-
-
-web: node busta.js && node busta.js
+web: node --max-old-space-size=450 busta.js
