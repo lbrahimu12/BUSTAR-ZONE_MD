@@ -1,32 +1,63 @@
 const {
   zokou
 } = require("../framework/zokou");
-const runtime = function (_0x28ca1c) {
-  _0x28ca1c = Number(_0x28ca1c);
-  var _0x268c3d = Math.floor(_0x28ca1c / 86400);
-  var _0x345b56 = Math.floor(_0x28ca1c % 86400 / 3600);
-  var _0x239dce = Math.floor(_0x28ca1c % 3600 / 60);
-  var _0x206c14 = Math.floor(_0x28ca1c % 60);
-  var _0x19d16e = _0x268c3d > 0 ? _0x268c3d + (_0x268c3d == 1 ? " day, " : " d, ") : '';
-  var _0x49ce9c = _0x345b56 > 0 ? _0x345b56 + (_0x345b56 == 1 ? " hour, " : " h, ") : '';
-  var _0x249a90 = _0x239dce > 0 ? _0x239dce + (_0x239dce == 1 ? " minute, " : " m, ") : '';
-  var _0x12266c = _0x206c14 > 0 ? _0x206c14 + (_0x206c14 == 1 ? " second" : " s") : '';
-  return _0x19d16e + _0x49ce9c + _0x249a90 + _0x12266c;
+
+// Function ya kuformat runtime vizuri
+const formatUptime = (seconds) => {
+  seconds = Number(seconds);
+  
+  const days = Math.floor(seconds / 86400);
+  const hours = Math.floor((seconds % 86400) / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const secs = Math.floor(seconds % 60);
+  
+  const parts = [];
+  
+  if (days > 0) {
+    parts.push(`${days} ${days === 1 ? 'day' : 'days'}`);
+  }
+  if (hours > 0) {
+    parts.push(`${hours} ${hours === 1 ? 'hour' : 'hours'}`);
+  }
+  if (minutes > 0) {
+    parts.push(`${minutes} ${minutes === 1 ? 'minute' : 'minutes'}`);
+  }
+  if (secs > 0 || parts.length === 0) {
+    parts.push(`${secs} ${secs === 1 ? 'second' : 'seconds'}`);
+  }
+  
+  return parts.join(', ');
 };
+
 zokou({
   'nomCom': "uptime",
-  'desc': "To check runtime",
+  'desc': "Check bot runtime and system status",
   'Categorie': "General",
-  'reaction': '🕐',
+  'reaction': '⏱️',
   'fromMe': "true"
-}, async (_0x4d1cb2, _0x6e67fd, _0x17c78a) => {
-  const {
-    ms: _0x42d661,
-    arg: _0x32ab8b,
-    repondre: _0x1e9691
-  } = _0x17c78a;
+}, async (sock, m, { ms, arg, repondre }) => {
   try {
-    await _0x6e67fd.sendMessage(_0x4d1cb2, {
+    const uptimeSeconds = process.uptime();
+    const formattedUptime = formatUptime(uptimeSeconds);
+    
+    // Additional system info
+    const memoryUsage = process.memoryUsage();
+    const memoryUsed = (memoryUsage.heapUsed / 1024 / 1024).toFixed(2);
+    const memoryTotal = (memoryUsage.heapTotal / 1024 / 1024).toFixed(2);
+    
+    const startTime = Date.now() - (uptimeSeconds * 1000);
+    const startDate = new Date(startTime).toLocaleString();
+    
+    const uptimeMessage = `╭━━━〔 *BOT STATUS* 〕━━━┈ ⊳
+┃
+┃ ⏰ *Uptime:* ${formattedUptime}
+┃ 📅 *Started:* ${startDate}
+┃ 💾 *Memory:* ${memoryUsed}MB / ${memoryTotal}MB
+┃ ⚡ *Status:* ${uptimeSeconds < 60 ? '🟢 Just Started' : uptimeSeconds < 3600 ? '🟢 Active' : '🔵 Long Running'}
+┃
+╰━━━━━━━━━━━━━━━━⊱`;
+    
+    await sock.sendMessage(m, {
       'audio': {
         'url': "https://files.catbox.moe/2wonzj.mp3"
       },
@@ -41,8 +72,8 @@ zokou({
         },
         'forwardingScore': 0x3e7,
         'externalAdReply': {
-          'title': "Bot Runtime",
-          'body': " Uptime: " + runtime(process.uptime()),
+          'title': "✨ BOT RUNTIME INFO ✨",
+          'body': uptimeMessage,
           'thumbnailUrl': "https://files.catbox.moe/9nlsf2.jpg",
           'sourceUrl': "",
           'mediaType': 0x1,
@@ -50,10 +81,11 @@ zokou({
         }
       }
     }, {
-      'quoted': _0x42d661
+      'quoted': ms
     });
-  } catch (_0x141e7b) {
-    console.log("❌ uptime Command Error: " + _0x141e7b);
-    _0x1e9691("❌ Error: " + _0x141e7b);
+    
+  } catch (error) {
+    console.error("❌ Uptime Command Error:", error);
+    repondre("❌ *Error:* " + error.message);
   }
 });
