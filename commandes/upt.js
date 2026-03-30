@@ -2,38 +2,32 @@ const {
   zokou
 } = require("../framework/zokou");
 
-// Function ya kuformat runtime vizuri
-const formatUptime = (seconds) => {
-  seconds = Number(seconds);
+const runtime = function (_0x28ca1c) {
+  _0x28ca1c = Number(_0x28ca1c);
+  var _0x268c3d = Math.floor(_0x28ca1c / 86400);
+  var _0x345b56 = Math.floor(_0x28ca1c % 86400 / 3600);
+  var _0x239dce = Math.floor(_0x28ca1c % 3600 / 60);
+  var _0x206c14 = Math.floor(_0x28ca1c % 60);
   
-  const days = Math.floor(seconds / 86400);
-  const hours = Math.floor((seconds % 86400) / 3600);
-  const minutes = Math.floor((seconds % 3600) / 60);
-  const secs = Math.floor(seconds % 60);
+  // Format nicely with proper grammar
+  var _0x19d16e = _0x268c3d > 0 ? _0x268c3d + (_0x268c3d == 1 ? " day, " : " days, ") : '';
+  var _0x49ce9c = _0x345b56 > 0 ? _0x345b56 + (_0x345b56 == 1 ? " hour, " : " hours, ") : '';
+  var _0x249a90 = _0x239dce > 0 ? _0x239dce + (_0x239dce == 1 ? " minute, " : " minutes, ") : '';
+  var _0x12266c = _0x206c14 > 0 ? _0x206c14 + (_0x206c14 == 1 ? " second" : " seconds") : '';
   
-  const parts = [];
-  
-  if (days > 0) {
-    parts.push(`${days} ${days === 1 ? 'day' : 'days'}`);
-  }
-  if (hours > 0) {
-    parts.push(`${hours} ${hours === 1 ? 'hour' : 'hours'}`);
-  }
-  if (minutes > 0) {
-    parts.push(`${minutes} ${minutes === 1 ? 'minute' : 'minutes'}`);
-  }
-  if (secs > 0 || parts.length === 0) {
-    parts.push(`${secs} ${secs === 1 ? 'second' : 'seconds'}`);
+  // If nothing, show 0 seconds
+  if (!_0x19d16e && !_0x49ce9c && !_0x249a90 && !_0x12266c) {
+    return "0 seconds";
   }
   
-  return parts.join(', ');
+  return _0x19d16e + _0x49ce9c + _0x249a90 + _0x12266c;
 };
 
 zokou({
   'nomCom': "uptime",
-  'desc': "Check bot runtime and system status",
+  'desc': "To check bot runtime",
   'Categorie': "General",
-  'reaction': '⏱️',
+  'reaction': '🕐',
   'fromMe': "true"
 }, async (_0x4d1cb2, _0x6e67fd, _0x17c78a) => {
   const {
@@ -43,25 +37,24 @@ zokou({
   } = _0x17c78a;
   
   try {
-    const uptimeSeconds = process.uptime();
-    const formattedUptime = formatUptime(uptimeSeconds);
+    // Calculate uptime
+    const uptimeValue = process.uptime();
+    const formattedUptime = runtime(uptimeValue);
     
-    // Additional system info
+    // Calculate additional stats
     const memoryUsage = process.memoryUsage();
-    const memoryUsed = (memoryUsage.heapUsed / 1024 / 1024).toFixed(2);
-    const memoryTotal = (memoryUsage.heapTotal / 1024 / 1024).toFixed(2);
+    const heapUsedMB = (memoryUsage.heapUsed / 1024 / 1024).toFixed(1);
+    const heapTotalMB = (memoryUsage.heapTotal / 1024 / 1024).toFixed(1);
     
-    const startTime = Date.now() - (uptimeSeconds * 1000);
-    const startDate = new Date(startTime).toLocaleString();
-    
-    const uptimeMessage = `╭━━━〔 *BOT STATUS* 〕━━━┈ ⊳
+    // Create beautiful message
+    const statusMessage = `╭━━━❪ *BOT STATUS* ❫━━━┈ ⊳
 ┃
-┃ ⏰ *Uptime:* ${formattedUptime}
-┃ 📅 *Started:* ${startDate}
-┃ 💾 *Memory:* ${memoryUsed}MB / ${memoryTotal}MB
-┃ ⚡ *Status:* ${uptimeSeconds < 60 ? '🟢 Just Started' : uptimeSeconds < 3600 ? '🟢 Active' : '🔵 Long Running'}
+┃ ⏰ *Uptime* : ${formattedUptime}
+┃ 💾 *Memory* : ${heapUsedMB}MB / ${heapTotalMB}MB
+┃ 🤖 *Status* : ${uptimeValue < 60 ? 'Just Started' : uptimeValue < 3600 ? 'Active' : 'Long Running'}
+┃ 📊 *Commands* : ${global.commandsExecuted || 0}
 ┃
-╰━━━━━━━━━━━━━━━━⊱`;
+╰━━━━━━━━━━━━━━━━━━⊱`;
     
     // Send audio with context info
     await _0x6e67fd.sendMessage(_0x4d1cb2, {
@@ -79,18 +72,20 @@ zokou({
         },
         'forwardingScore': 0x3e7,
         'externalAdReply': {
-          'title': "✨ BOT RUNTIME INFO ✨",
-          'body': uptimeMessage,
+          'title': "✨ SYSTEM RUNTIME ✨",
+          'body': statusMessage,
           'thumbnailUrl': "https://files.catbox.moe/9nlsf2.jpg",
-          'sourceUrl': "",
+          'sourceUrl': "https://whatsapp.com/channel/0029VaoZpXrJDUVPLA0fS30y",
           'mediaType': 0x1,
           'renderLargerThumbnail': true
         }
       }
+    }, {
+      'quoted': _0x42d661
     });
     
-  } catch (error) {
-    console.error("❌ Uptime Command Error:", error);
-    _0x1e9691("❌ *Error:* " + error.message);
+  } catch (_0x141e7b) {
+    console.log("❌ uptime Command Error: " + _0x141e7b);
+    _0x1e9691("❌ *Uptime Error:* " + _0x141e7b);
   }
 });
