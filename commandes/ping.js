@@ -2,29 +2,28 @@ function hi() {
   console.log("Hello World!");
 }
 hi();
-const {
-  zokou
-} = require(__dirname + "/../framework/zokou");
+
+const { zokou } = require(__dirname + "/../framework/zokou");
 const moment = require("moment-timezone");
 const set = require(__dirname + '/../set');
+
 moment.tz.setDefault('' + set.TZ);
+
 zokou({
   'nomCom': "ping",
   'categorie': "General"
-}, async (_0x15d66e, _0x138511, _0x58a8c2) => {
-  let {
-    ms: _0x764c8d
-  } = _0x58a8c2;
-  const {
-    time: _0x5c9222,
-    date: _0x1a48f0
-  } = {
+}, async (origin, message, options) => {
+  let { ms: quotedMessage } = options;
+  
+  const { time: currentTime, date: currentDate } = {
     'time': moment().format('HH:mm:ss'),
     'date': moment().format("DD/MM/YYYY")
   };
-  const _0x46790b = Math.floor(Math.random() * 0x64) + 0x1;
+  
+  const pingValue = Math.floor(Math.random() * 100) + 1;
+  
   try {
-    await _0x138511.sendMessage(_0x15d66e, {
+    await message.sendMessage(origin, {
       'audio': {
         'url': "https://files.catbox.moe/2wonzj.mp3"
       },
@@ -35,22 +34,27 @@ zokou({
         'forwardedNewsletterMessageInfo': {
           'newsletterJid': "120363425127251695@newsletter",
           'newsletterName': "ʙᴜsᴛᴀʀᴢᴏɴᴇ ᴍᴅ",
-          'serverMessageId': 0x8f
+          'serverMessageId': 143 // 0x8f in decimal
         },
-        'forwardingScore': 0x3e7,
+        'forwardingScore': 999, // 0x3e7 in decimal
         'externalAdReply': {
           'title': "ʙᴜsᴛᴀʀᴢᴏɴᴇ ᴍᴅ",
-          'body': "🌟 𝗽𝗶𝗻𝗴: " + _0x46790b + "ms\n📅 *Date:* " + _0x1a48f0 + "\n⏰ *Time:* " + _0x5c9222,
-          'thumbnailUrl': "120363425127251695@newsletter",
-          'mediaType': 0x1,
+          'body': `🌟 𝗽𝗶𝗻𝗴: ${pingValue}ms\n📅 *Date:* ${currentDate}\n⏰ *Time:* ${currentTime}`,
+          'thumbnailUrl': "https://example.com/thumbnail.jpg", // Changed from newsletter JID
+          'mediaType': 1,
           'renderSmallThumbnail': true
         }
       }
     }, {
-      'quoted': _0x764c8d
+      'quoted': quotedMessage
     });
-  } catch (_0x26a749) {
-    console.log("❌ Ping Command Error: " + _0x26a749);
-    repondre("❌ Error: " + _0x26a749);
+  } catch (error) {
+    console.log("❌ Ping Command Error: " + error);
+    // Ensure repondre function exists or use message.reply
+    if (typeof repondre === 'function') {
+      repondre("❌ Error: " + error);
+    } else {
+      await message.sendMessage(origin, { text: "❌ Error: " + error });
+    }
   }
 });
