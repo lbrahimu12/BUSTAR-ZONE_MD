@@ -35,7 +35,13 @@ zokou({
   'Categorie': "General",
   'reaction': '⏱️',
   'fromMe': "true"
-}, async (sock, m, { ms, arg, repondre }) => {
+}, async (_0x4d1cb2, _0x6e67fd, _0x17c78a) => {
+  const {
+    ms: _0x42d661,
+    arg: _0x32ab8b,
+    repondre: _0x1e9691
+  } = _0x17c78a;
+  
   try {
     const uptimeSeconds = process.uptime();
     const formattedUptime = formatUptime(uptimeSeconds);
@@ -57,7 +63,8 @@ zokou({
 ┃
 ╰━━━━━━━━━━━━━━━━⊱`;
     
-    await sock.sendMessage(m, {
+    // Send audio with context info
+    await _0x6e67fd.sendMessage(_0x4d1cb2, {
       'audio': {
         'url': "https://files.catbox.moe/2wonzj.mp3"
       },
@@ -80,12 +87,10 @@ zokou({
           'renderLargerThumbnail': true
         }
       }
-    }, {
-      'quoted': ms
     });
     
   } catch (error) {
     console.error("❌ Uptime Command Error:", error);
-    repondre("❌ *Error:* " + error.message);
+    _0x1e9691("❌ *Error:* " + error.message);
   }
 });
