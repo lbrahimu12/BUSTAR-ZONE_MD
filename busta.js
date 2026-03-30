@@ -1235,6 +1235,10 @@ if (conf.AUTO_READ === 'yes') {
                 }
             }
         }
+    } catch (e) {
+        console.log("antilink error: " + e);
+    }
+
         /** *************************anti-bot******************************************** */
     try {
         const botMsg = ms.key?.id?.startsWith('BAES') && ms.key?.id?.length === 16;
