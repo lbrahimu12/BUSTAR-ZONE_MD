@@ -1,2 +1,2 @@
 
-web: node --max-old-space-size=450 busta.js
+web: node --max-old-space-size=450 --no-deprecation busta.js
